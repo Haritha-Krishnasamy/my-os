@@ -14,7 +14,10 @@ mykernel.bin: linker.ld $(objects)
 	ld $(LDPARAMS) -T $< -o $@ $(objects)
 
 install: mykernel.bin
-	qemu-system-i386 -kernel mykernel.bin
+	qemu-system-i386 -kernel mykernel.bin -display gtk
+
+debug: mykernel.bin
+	qemu-system-i386 -kernel mykernel.bin -display gtk -s -S
 
 clean:
 	rm -f *.o mykernel.bin
