@@ -1,3 +1,6 @@
+#include "types.h"
+#include "gdt.h"
+
 void printf(char *str)
 {
     unsigned short *videomemory = (unsigned short *)0xb8000;
@@ -48,6 +51,8 @@ extern "C" void kernelmain(void *multiboot_structure, unsigned int magicnumber)
     // Print our message
     char *str = (char *)"Hello World from My Kernel!";
     printf(str);
+
+    GlobalDescriptorTable gdt;
 
     while (1)
         ;
