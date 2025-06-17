@@ -49,7 +49,7 @@ extern "C" void kernelmain(void *multiboot_structure, unsigned int magicnumber)
     clear_screen();
 
     // Print our message
-    char *str = (char *)"Hello World from My Kernel!";
+    char *str = (char *)"Hello World from My Kernel!\n";
     printf(str);
 
     GlobalDescriptorTable gdt;

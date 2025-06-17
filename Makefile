@@ -2,13 +2,16 @@ GPPPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-objects = loader.o gdt.o kernel.o
+objects = loader.o gdt.o port.o kernel.o
 
 %.o: %.cpp
 	g++ $(GPPPARAMS) -c $< -o $@
 
 .o: %.cpp
 	g++ -c gdt.cpp -o  gdt.o
+
+.o: %.cpp
+	g++ -c port.cpp -o  port.o
 
 %.o: %.s
 	as $(ASPARAMS) -o $@ $<
@@ -23,4 +26,4 @@ debug: mykernel.bin
 	qemu-system-i386 -kernel mykernel.bin -display gtk -s -S
 
 clean:
-	rm -f *.o mykernel.bin
+	rm -f *.o mykernel.bin mykernel.iso
